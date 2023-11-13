@@ -1,6 +1,6 @@
 # How to use
-- clone repository
-- changed project path
+- clone the repository
+- change project path
 - run docker & use for your need
 
 # Stack
