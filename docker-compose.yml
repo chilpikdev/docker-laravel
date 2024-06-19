@@ -50,7 +50,19 @@ services:
             - ./_docker/data/redis:/data
             # - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
         environment:
-            - REDIS_PASSWORD=12345
-            - REDIS_PORT=6379
-            - REDIS_DATABASES=16
+            REDIS_PASSWORD: 12345
+            REDIS_PORT: 6379
+            REDIS_DATABASES: 16
         container_name: project_name_redis
+    mongodb:
+        image: mongo:latest
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: root
+            MONGO_INITDB_DATABASE: mydb
+        ports:
+            - "27017:27017"
+        volumes:
+            - ./_docker/data/mongodb:/data/db
+        restart: always
+        container_name: project_mongodb
