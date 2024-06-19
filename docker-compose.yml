@@ -6,7 +6,7 @@ services:
             - ./_docker/images/nginx/conf.d/:/etc/nginx/conf.d/
         ports:
             - "8000:80"
-        container_name: project_nginx
+        container_name: project_name_nginx
         depends_on:
             - php
     php:
@@ -17,21 +17,21 @@ services:
             - ./:/var/www/
         depends_on:
             - mysql
-        container_name: project_php
+        container_name: project_name_php
     mysql:
         image: mysql:8.2.0
         restart: always
         volumes:
-            - ./mysql-data:/var/lib/mysql
+            - ./_docker/data/mysql:/var/lib/mysql
         ports:
             - "3306:3306"
         command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --log_bin_trust_function_creators=1
         env_file:
             - ./_docker/images/mysql/mysql.env
-        container_name: project_mysql
+        container_name: project_name_mysql
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
-        container_name: project_pma
+        container_name: project_name_pma
         links:
             - mysql
         environment:
@@ -47,10 +47,10 @@ services:
         ports:
             - "6379:6379"
         volumes:
-            - ./redis-data:/data
+            - ./_docker/data/redis:/data
             # - /path/to/local/redis.conf:/usr/local/etc/redis/redis.conf
         environment:
             - REDIS_PASSWORD=12345
             - REDIS_PORT=6379
             - REDIS_DATABASES=16
-        container_name: project_redis
+        container_name: project_name_redis
