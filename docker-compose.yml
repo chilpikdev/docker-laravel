@@ -38,6 +38,7 @@ services:
             PMA_HOST: mysql
             PMA_PORT: 3306
             PMA_ARBITRARY: 1
+            UPLOAD_LIMIT: 100000000
         restart: always
         ports:
             - "8081:80"
